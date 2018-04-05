@@ -1,0 +1,110 @@
+/*注册css*/
+#register {
+	margin-bottom: 120px;
+}
+.form-register {
+	max-width: 400px;
+	padding: 15px;
+	padding-top: 200px;
+	margin: 0 auto;
+}
+.form-login {
+	text-align: center;
+}
+.form-login a {
+	font-size: 1.5em;
+}
+
+
+/*简介css*/
+.tab1 { 
+	background: #eee; 
+	padding: 60px 20px; 
+	text-align: center; 
+} 
+/*.tab1 img { 
+	width: 40%; 
+	height: 40%; 
+} */
+.tab2 { 
+	padding: 40px 0; 
+	text-align: center; 
+} 
+
+.tab3 { 
+	background: #eee; 
+	padding: 60px 20px; 
+	text-align: center; 
+} 
+/*.tab3 img { 
+	width: 40%; 
+	height: 40%; 
+} */
+.tab4 { 
+	padding: 40px 0; 
+	text-align: center; 
+} 
+/*.tab4 img { 
+	width: 65%; 
+	height: 65%; 
+} */
+.text h3 {
+	font-size: 20px;
+} 
+.text p {
+	font-size: 14px; 
+	text-align: left;
+}
+/* 小屏幕（平板，大于等于 768px） */ 
+@media (min-width: 768px) { 
+	.text h3 {
+		font-size: 22px;
+	} 
+	.text p { 
+		font-size: 15px; 
+	} 
+	.tab1-text,.tab3-text { 
+		float: left; 
+	} 
+	.tab1-img,.tab3-img { 
+		float: right; 
+	}
+}
+/* 中等屏幕（桌面显示器，大于等于 992px） */ 
+@media (min-width: 992px) { 
+	.text h3 { 
+		font-size: 24px; 
+	} 
+	.text p {
+		font-size: 16px; 
+	} 
+	.tab1-text,.tab3-text {
+		float: left; 
+	} 
+	.tab1-img,.tab3-img { 
+		float: right; 
+	}
+}
+/* 大屏幕（大桌面显示器，大于等于 1200px） */ 
+@media (min-width: 1200px) { 
+	.text h2 { 
+		font-size: 26px; 
+	} 
+	.text p { 
+		font-size: 18px; 
+	} 
+	.tab1-text,.tab3-text { 
+		float: left; 
+	} 
+	.tab1-img,.tab3-img { 
+		float: right; 
+	} 
+}
+
+/*页脚css*/
+#footer {
+	padding: 20px;
+	text-align: center;
+	background-color: #eee;
+	border-top: 1px solid #ccc;
+}
