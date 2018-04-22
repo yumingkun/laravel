@@ -22,7 +22,7 @@
 
 
 {{--富文本框--}}
-    <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
 
 
 </head>
@@ -40,7 +40,9 @@
 
         @yield('content')
 
-        @include('layout.sidebar')
+        @yield('trash')
+
+
 
     </div>
 

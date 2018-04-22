@@ -29,4 +29,15 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+//
+//    //显示重置密码的邮箱发送页
+//    public function showLinkRequestForm(){
+//        return view('auth.email');
+//    }
+//
+//    //处理重置密码的邮箱发送页post过来的邮箱
+//    public function sendResetLinkEmail(){
+//
+//        return redirect('/password/reset');
+//    }
 }

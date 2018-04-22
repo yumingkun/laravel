@@ -22,29 +22,30 @@
 
 
 {{--富文本框--}}
-    <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
 
 
 </head>
 
 <body  style="color: #8c8c8c">
 
-@include('layout.nav')
+@include('layout.nav_index')
 
 <div class="container">
 
-    <div class="blog-header">
-    </div>
 
     <div class="row">
 
         @yield('content')
 
-        @include('layout.sidebar')
+        {{--@include('layout.sidebar')--}}
+
 
     </div>
 
 </div>
+{{--简介--}}
+@include('layout.intro')
 
 @include('layout.footer')
 

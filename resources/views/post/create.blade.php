@@ -1,24 +1,44 @@
-@extends("layout.main")
+@extends("layout.mian_remove_sidebar_trash")
 
 @section("content")
 
-    <div class="col-sm-8 ">
-
+    <div class="col-md-8 col-md-offset-2 "  style="margin-top: 80px">
 
 
         <form action="/posts" method="POST">
             {{csrf_field()}}
+
+            <div class="form-group">
+                <label >所属笔记本</label>
+                <select name="note"  class="form-control">
+                    @foreach($notes as $note)
+                    <option value="{{$note->note}}" class="form-control">{{$note->note}}</option><br/>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="form-group">
                 <label>标题</label>
                 <input name="title" type="text" class="form-control" placeholder="这里是标题">
             </div>
 
             <div class="form-group">
+                <label>分类</label>
+                <select name="cate"  class="form-control">
+                    <option value="科技" class="form-control">科技</option>
+                    <option value="文化" class="form-control">文化</option>
+                    <option value="旅游" class="form-control">旅游</option>
+                    <option value="其他" class="form-control">其它</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label>内容</label>
-                <textarea id="content"  style="height:700px;max-height:500px;" name="content" class="form-control" placeholder="这里是内容">
+                <textarea id="content"  style="height:500px;max-height:500px;" name="content" class="form-control" placeholder="这里是内容">
 
                 </textarea>
             </div>
+
 
             {{--错误提示--}}
             @if(count($errors)>0)

@@ -1,8 +1,9 @@
-@extends('layout.main')
+@extends("layout.mian_remove_sidebar_trash")
 
 @section('content')
 
-        <div class="col-sm-8 " >
+    <div class="col-md-8 col-md-offset-2 "  style="margin-top: 80px">
+
             <div>
                 {{--//笔记详情--}}
                 <div class="page-header">
@@ -12,17 +13,25 @@
 
                 {{--//显示--}}
                 <div >
-                    <p class="blog-post-meta">{{$post->created_at}} by <a href="#"> </a></p>
-                    <h2>{{$post->title }}&nbsp; &nbsp;<a href="/posts/{{$post->id}}/edit"><span class="glyphicon glyphicon-pencil"></span></a> <a href="/posts/{{$post->id}}/delete"><span class="glyphicon glyphicon-remove"></span></a></h2>
+                    <p >{{$post->created_at}}  <span class="glyphicon glyphicon-user"></span> {{$post->user->name}} &nbsp;&nbsp;<a href="/posts/{{$post->note}}"><span class="glyphicon glyphicon-book"></span> {{$post->note}}</a> </a> <span class="glyphicon glyphicon-tags" style="float: right">  {{ $post->cate ? $post->cate : '其它' }}</span></p>
+                    <h2>{{$post->title }}&nbsp; &nbsp;</h2>
                     <br/>
-                    {!! $post->content !!}
+                    <p>{!! $post->content !!}</p>
                     <div>
-                        <a href="/posts/{{$post->id}}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
+                        {{--<a href="/posts/{{$post->id}}/zan" type="button" class="btn btn-primary btn-lg">赞</a>--}}
                     </div>
                 </div>
             </div>
 
-            <div class="page-header" style="height: 300px"></div>
+            <div class="page-header" style="padding-top: 200px;">
+                <h1>
+                    <a href="/posts/{{$post->id}}/edit"><span class="glyphicon glyphicon-edit" style="color: #4cae4c"></span></a>
+
+
+                    <a href="/posts/{{$post->id}}/delete"><span class="glyphicon glyphicon-trash" style="float: right;color: #bf5329"></span></a>
+                </h1>
+            </div>
+
 
         </div>
 
