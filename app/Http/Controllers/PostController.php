@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Cate;
 use App\Note;
 use App\Post;
 
@@ -21,15 +22,19 @@ class PostController extends Controller
         //回收站数量
         $nums = Post::onlyTrashed()->where('user_id','=',$id)->get();
         $num=$nums->count();
+//
+//        //分类各个类的数
+//        $cate[]=Post::where('user_id', '=', $id)->where('cate', '=','科技')->orderBy('created_at','desc')->get()->count();
+//        $cate[]=Post::where('user_id', '=', $id)->where('cate', '=','文化')->orderBy('created_at','desc')->get()->count();
+//        $cate[]=Post::where('user_id', '=', $id)->where('cate', '=','旅游')->orderBy('created_at','desc')->get()->count();
+//        $cate[]=Post::where('user_id', '=', $id)->where('cate', '=','其它')->orderBy('created_at','desc')->get()->count();
 
-        //分类各个类的数
-        $cate[]=Post::where('user_id', '=', $id)->where('cate', '=','科技')->orderBy('created_at','desc')->get()->count();
-        $cate[]=Post::where('user_id', '=', $id)->where('cate', '=','文化')->orderBy('created_at','desc')->get()->count();
-        $cate[]=Post::where('user_id', '=', $id)->where('cate', '=','旅游')->orderBy('created_at','desc')->get()->count();
-        $cate[]=Post::where('user_id', '=', $id)->where('cate', '=','其它')->orderBy('created_at','desc')->get()->count();
+        //统计每个分类下有几篇文章
+      $cate = Post::select('cate',DB::raw('COUNT(*) as num'))->groupBy('cate','user_id')->having('user_id','=',$id)->orderBy('created_at','asc')->get();
 
 
-        return view('note.home',compact('num','cate'));
+      $cates=Cate::where('user_id', '=', $id)->get();
+        return view('note.home',compact('num','cate','cates'));
     }
 
     //单个笔记列表
@@ -49,11 +54,11 @@ class PostController extends Controller
     }
     //创建笔记
     public  function  create(){
-
-        //获取所有的笔记本名字
         $id=Auth::id();
         $notes=Note::where('user_id','=',$id)->get();
-        return view('post/create',compact('notes'));
+
+        $cates=Cate::where('user_id', '=', $id)->get();//获取cates表所有新建的类别名
+        return view('post/create',compact('notes','cates'));
     }
 
     //创建逻辑 接收创建笔记post过来的数据
@@ -75,7 +80,8 @@ class PostController extends Controller
         $note=\request('note');
 
         //3渲染
-        return redirect('/posts/'.$note);
+        $name=\request('title');
+        return redirect('/posts/'.$note)->with('message6',$name.'笔记已创建成功');
     }
 
     //编辑笔记的视图
@@ -83,7 +89,9 @@ class PostController extends Controller
 
         $id=Auth::id();
         $notes=Note::where('user_id','=',$id)->get();
-        return view('post/edit',compact('post','notes'));
+
+        $cates=Cate::where('user_id', '=', $id)->get();//获取cates表所有新建的类别名
+        return view('post/edit',compact('post','notes','cates'));
     }
 
     //编辑提交之后post的值
@@ -102,8 +110,9 @@ class PostController extends Controller
         $post->note=\request('note');
         $post->save();
 
+        $title=\request('title');
         //3视图
-        return redirect("/posts/show/{$post->id}");
+        return redirect("/posts/show/{$post->id}")->with('message7',$title.'编辑成功');
 
     }
 
@@ -115,8 +124,8 @@ class PostController extends Controller
 //        if($post->trashed()){
 //            dd($post);
 //        }
-
-       return redirect("/home");
+        $title=$post->title;
+        return redirect("/home")->with('message8',$title.'成功放入回收站');
     }
 
     //搜索
@@ -147,13 +156,13 @@ class PostController extends Controller
 //
 //
 //        dd('yugaystyuags');
-        return  redirect('/trash');
+        return  redirect('/trash')->with('message4','笔记已经全部恢复');
     }
     //彻底删除单个
     public  function delete_one($id){
 
         Post::onlyTrashed()->where('id','=',$id)->forceDelete();
-        return redirect('/trash');
+        return redirect('/trash')->with('message5','此笔记已彻底删除');
     }
 
     //恢复指定的笔记
@@ -167,7 +176,7 @@ class PostController extends Controller
 //        $post->restore();
         Post::withTrashed()->where('id','=',$id)->restore();
 
-         return redirect('/trash');
+         return redirect('/trash')->with('message4','此笔记已经恢复');
     }
     //删除回收站全部
     public  function trash_all(){
@@ -175,7 +184,7 @@ class PostController extends Controller
        Post::onlyTrashed()->forceDelete();
 
 
-        return  redirect('/trash');
+        return  redirect('/trash')->with('message5','所有笔记已彻底删除');
     }
 
 
@@ -184,7 +193,7 @@ class PostController extends Controller
         $id=Auth::id();//门脸类获取当前用户id
         $posts=Post::where('user_id', '=', $id)->where('cate', '=',$name)->orderBy('created_at','desc')->paginate(6);
 
-
-        return view('post/cate',compact('posts','name'));
+        $num=Post::where('user_id', '=', $id)->where('cate', '=',$name)->orderBy('created_at','desc')->count();
+        return view('post/cate',compact('posts','name','num'));
     }
 }

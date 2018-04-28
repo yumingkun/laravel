@@ -30,6 +30,9 @@
                     <option value="科技" class="form-control">科技</option>
                     <option value="文化" class="form-control">文化</option>
                     <option value="旅游" class="form-control">旅游</option>
+                    @foreach($cates as $cate)
+                        <option value="{{$cate->name}}" class="form-control">{{$cate->name}}</option>
+                    @endforeach
                     <option value="其它" class="form-control">其它</option>
                 </select>
             </div>

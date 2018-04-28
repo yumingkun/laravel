@@ -8,7 +8,7 @@
 
         {{--分类列表--}}
         <div class="page-header">
-            <h1 style="color: #b1b7ba"><span class="glyphicon glyphicon-tags"></span>  -{{$name}}</h1>
+            <h1 style="color: #b1b7ba"><span class="glyphicon glyphicon-tags"></span>  -{{$name}} <span style="float: right">{{$num}}</span></h1>
         </div>
 
         @foreach($posts as $post)

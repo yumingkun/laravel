@@ -7,6 +7,19 @@
             <h1 style="color: #b1b7ba">回收站列表</h1>
         </div>
 
+        @if(Session::has('message4'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong> {{Session::get('message4')}}</strong>
+            </div>
+        @endif
+        @if(Session::has('message5'))
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong> {{Session::get('message5')}}</strong>
+            </div>
+        @endif
+
         {{--具体操作--}}
     <!-- Single button -->
         <div class="btn-group btn-group-justified" role="group"  style="margin-bottom: 20px;">

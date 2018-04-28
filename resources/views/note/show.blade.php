@@ -4,10 +4,17 @@
 @section('content')
     <div class="col-md-8 col-md-offset-2" style="margin-top: 120px">
 
-
+        @if(Session::has('message1'))
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong> {{Session::get('message1')}}</strong>
+            </div>
+        @endif
 
         <div>
-            @foreach($notes as $note)
+
+
+        @foreach($notes as $note)
 
                     <div class="col-sm-3 col-md-4">
                         <div class="thumbnail">

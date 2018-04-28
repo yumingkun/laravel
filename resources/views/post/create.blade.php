@@ -7,6 +7,13 @@
 
         <form action="/posts" method="POST">
             {{csrf_field()}}
+            @if(Session::has('message2'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong> {{Session::get('message2')}}</strong>
+                </div>
+            @endif
+
 
             <div class="form-group">
                 <label >所属笔记本</label>
@@ -23,12 +30,16 @@
             </div>
 
             <div class="form-group">
-                <label>分类</label>
+                <label>标签</label>
                 <select name="cate"  class="form-control">
                     <option value="科技" class="form-control">科技</option>
                     <option value="文化" class="form-control">文化</option>
                     <option value="旅游" class="form-control">旅游</option>
-                    <option value="其他" class="form-control">其它</option>
+                    @foreach($cates as $cate)
+                        <option value="{{$cate->name}}" class="form-control">{{$cate->name}}</option>
+                    @endforeach
+                    <option value="其它" class="form-control">其它</option>
+
                 </select>
             </div>
 

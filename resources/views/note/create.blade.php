@@ -19,14 +19,14 @@
         <form action="/new_notebook_store" method="POST">
             {{csrf_field()}}
             <div class="form-group">
-                <label>笔记名</label>
+                <label>笔记本名</label>
                 <br/>
-                <input name="note" type="text" class="form-control" placeholder="笔记名">
+                <input name="note" type="text" class="form-control" placeholder="笔记本">
             </div>
             <button type="submit" class="btn btn-success">提交 <span class="glyphicon glyphicon-ok"></span></button>
         </form>
 
-        <div class="page-header" style="height: 260px"> </div>
+        <div class="page-header" style="height: 340px"> </div>
 
     </div>
 @endsection

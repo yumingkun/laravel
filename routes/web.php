@@ -64,6 +64,14 @@ Route::get('/recover_one/{id}','PostController@recover_one');
 //文章分类页等等
 Route::get('/posts/cate/{name}','PostController@cate');
 
+//创建新类别
+Route::get('/posts/cate_s/create','CateController@create');
+Route::post('/posts/cate_s/create','CateController@store');
+
+//删除类别
+Route::get('/posts/cate_delete/{name}','CateController@delete');
+
+
 
 
 
@@ -76,12 +84,22 @@ Route::get('/register','RegisterController@index');
 //注册行为
 Route::post('/register','RegisterController@register');
 
+//修改密码
+Route::get('/change/password ',function (){
+    return view("password.change");
+});
+Route::post('/change/password','RegisterController@change');
+
 //登录页面
 Route::get('/login','LoginController@index');
 //登录行为
 Route::post('/login','LoginController@login');
 //登出行为
 Route::get('/logout','LoginController@logout');
+
+
+
+
 
 
 

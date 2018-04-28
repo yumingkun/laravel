@@ -13,7 +13,12 @@
                 <h1 style="color: #b1b7ba">{{$note}}笔记本 <small style="float: right">共有{{$num}}条笔记</small> </h1>
             </div>
 
-
+            @if(Session::has('message6'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>{{Session::get('message6')}}点击标题查看详情</strong>
+                </div>
+            @endif
             {{--文章面板列表--}}
 
             <div>
